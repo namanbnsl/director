@@ -127,8 +127,8 @@ If `ffmpeg` is missing, stop and tell the user that Director requires `ffmpeg` b
 
 When choosing a package manager:
 
-- Prefer `bun` if available.
-- Otherwise use `pnpm` if available.
+- Prefer `bun` & `bunx` if available.
+- Otherwise use `pnpm` & `pnpx` if available.
 - Otherwise fall back to `npm`.
 - If a project is already clearly using one package manager, follow the existing project convention unless the user asks to change it.
 
