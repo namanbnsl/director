@@ -160,11 +160,11 @@ If the user says yes:
 10. If the video contains math, equations, formulas, notation, proofs, algorithms, or quantitative derivations, apply the math rendering rules: `skills/hyperframes/hyperframes/references/math-rendering.md`.
 11. Run the consistency pass before preview: `skills/hyperframes/hyperframes/references/consistency-pass.md`.
 12. Run the HyperFrames CLI validation loop before showing the result:
-   `npx hyperframes lint`
-   `npx hyperframes validate`
-   `npx hyperframes inspect`
-   `npx hyperframes snapshot`
-   `npx hyperframes preview`
+    `npx hyperframes lint`
+    `npx hyperframes validate`
+    `npx hyperframes inspect`
+    `npx hyperframes snapshot`
+    `npx hyperframes preview`
 13. Use the HyperFrames preview as the review surface shown back to the user.
 14. Ask for feedback and continue iterating.
 
@@ -194,6 +194,7 @@ When making the video, Director should be proactive about motion design quality.
 - Every major beat should have anticipation, primary action, follow-through, and continuing life. The viewer should feel authored timing, not template movement.
 - Motion should be custom to the subject: data behaves like data, architecture behaves like a system, product UI changes state, and abstract motion reacts to the story.
 - Professional yet fun means controlled craft plus one or two playful moments: tactile overshoot, delightful state changes, charming micro-interactions, expressive transitions, or clever visual metaphors. Do not let fun become random style changes.
+- Teaching videos should explain through transformation: show the idea changing, then name it. Do not rely on labels, narration, or completed diagrams to do the teaching.
 - Before preview, run `node skills/hyperframes/hyperframes/scripts/animation-map.mjs . --frames 6` when dependencies are available, or manually audit the timeline and record the motion proof in `director.project.md`.
 
 ## Video Standard
@@ -243,6 +244,7 @@ Common ways to strengthen a weak build:
 - Add shot language to the storyboard: close-up, wide, tracking, push-in, pull-back, overhead, orbit, fly-through, or split-screen. If every beat is a front-facing centered layout, it is not ready.
 - Use shared-element transitions and match cuts so scenes feel connected: an object, path, number, card, node, or camera move should carry the viewer into the next beat.
 - For math-heavy videos, use KaTeX/SVG/Canvas/Three.js rendering and animate the derivation semantically. Raw text formulas or hand-spaced symbols are not acceptable.
+- For teaching-heavy videos, define the learning objective, misconception, proof moment, and recall hook. If a beat does not teach, orient, or reinforce, cut it.
 
 Director should not be scared of 3D. If 3D is the right answer, use it or route to the skill that will.
 

@@ -75,7 +75,8 @@ Before writing HTML, think at a high level:
 7. **Motion proof** — for each scene, name the build motion, mid-beat evolution, and transition/camera handoff. Do this before writing GSAP.
 8. **Beauty proof** — name the anticipation, primary action, follow-through, continuing life, and shared element or handoff for each major beat.
 9. **Consistency proof** — name what stays consistent across scenes: palette, type scale, shape language, motion physics, transition family, visual motif.
-10. **Math proof** — if math appears, name the renderer and semantic reveal plan.
+10. **Teaching proof** — if explaining something, name the learning objective, misconception, proof moment, attention order, and recall hook.
+11. **Math proof** — if math appears, name the renderer and semantic reveal plan.
 
 **Build what was asked.** A request for "a title card" is not a request for "a title card + 3 supporting scenes + ambient music + captions." Every scene, every element, every tween should earn its place. If additional scenes or elements would genuinely improve the piece, propose them — don't add them.
 
@@ -138,13 +139,29 @@ Position every element where it should be at its **most visible moment** — the
 ```js
 // Step 3: Animate INTO those positions
 tl.from(".title", { y: 60, opacity: 0, duration: 0.6, ease: "power3.out" }, 0);
-tl.from(".subtitle", { y: 40, opacity: 0, duration: 0.5, ease: "power3.out" }, 0.2);
-tl.from(".logo", { scale: 0.8, opacity: 0, duration: 0.4, ease: "power2.out" }, 0.3);
+tl.from(
+  ".subtitle",
+  { y: 40, opacity: 0, duration: 0.5, ease: "power3.out" },
+  0.2,
+);
+tl.from(
+  ".logo",
+  { scale: 0.8, opacity: 0, duration: 0.4, ease: "power2.out" },
+  0.3,
+);
 
 // Step 4: Animate OUT from those positions
 tl.to(".title", { y: -40, opacity: 0, duration: 0.4, ease: "power2.in" }, 3);
-tl.to(".subtitle", { y: -30, opacity: 0, duration: 0.3, ease: "power2.in" }, 3.1);
-tl.to(".logo", { scale: 0.9, opacity: 0, duration: 0.3, ease: "power2.in" }, 3.2);
+tl.to(
+  ".subtitle",
+  { y: -30, opacity: 0, duration: 0.3, ease: "power2.in" },
+  3.1,
+);
+tl.to(
+  ".logo",
+  { scale: 0.9, opacity: 0, duration: 0.3, ease: "power2.in" },
+  3.2,
+);
 ```
 
 ### When elements share space across time
@@ -364,11 +381,23 @@ tl.to("#s1-subtitle", { opacity: 0, duration: 0.3 }, 6.7);
 
 ```js
 // Scene 1 entrance animations
-tl.from("#s1-title", { y: 50, opacity: 0, duration: 0.7, ease: "power3.out" }, 0.3);
-tl.from("#s1-subtitle", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 0.6);
+tl.from(
+  "#s1-title",
+  { y: 50, opacity: 0, duration: 0.7, ease: "power3.out" },
+  0.3,
+);
+tl.from(
+  "#s1-subtitle",
+  { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" },
+  0.6,
+);
 // NO exit tweens — transition at 7.2s handles the scene change
 // Scene 2 entrance animations
-tl.from("#s2-heading", { x: -40, opacity: 0, duration: 0.6, ease: "expo.out" }, 8.0);
+tl.from(
+  "#s2-heading",
+  { x: -40, opacity: 0, duration: 0.6, ease: "expo.out" },
+  8.0,
+);
 ```
 
 ## Animation Guardrails
@@ -397,6 +426,18 @@ Math is a first-class visual system. If a scene includes equations, formulas, pr
 - Reveal equations semantically by term, operator, transformation, or result.
 - Pair dense math with a graph, diagram, number line, matrix grid, loss surface, or other visual explanation.
 
+## Teaching Quality
+
+When the composition explains anything, the video must teach through visual transformation.
+
+- Define one concrete learning objective for the whole video.
+- Give every teaching beat an orient/change/name/use/bridge rhythm.
+- Address at least one likely misconception when the topic is technical or abstract.
+- Keep attention order explicit: first look here, then here, then here.
+- Avoid simultaneous important changes. If two things matter, sequence them.
+- Preserve context anchors while details change.
+- Use snapshot review to check whether the concept is visible without replaying the entire video.
+
 If no `design.md` exists, follow [house-style.md](./house-style.md) for aesthetic defaults.
 
 ## Typography and Assets
@@ -422,6 +463,7 @@ If no `design.md` exists, follow [house-style.md](./house-style.md) for aestheti
 - [ ] Design adherence verified if design.md exists
 - [ ] Anti-slop gate passed: catalog/assets/visual systems used, gradient use justified, and the result is not a slide deck
 - [ ] Beauty proof passed: major beats have anticipation, primary action, follow-through, continuing life, and a custom visual system
+- [ ] Teaching proof passed if explanatory: objective, misconception, proof moment, attention path, and recall hook are clear
 - [ ] Consistency pass completed across palette, typography, shape, depth, motion, transitions, and motifs
 - [ ] Math rendering pass completed if math appears
 
@@ -471,6 +513,8 @@ Review the PNGs in `snapshots/` before preview. Check:
 - actual visual quality, not just DOM validity,
 - scene-to-scene consistency,
 - text and math readability,
+- whether the teaching focal point is obvious,
+- whether the frame shows a transformation or just a label,
 - raw LaTeX or broken math rendering,
 - accidental gradient-heavy scenes,
 - off-brand or mismatched type/radius/shadow styles,

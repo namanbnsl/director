@@ -18,6 +18,7 @@ Reject a build when:
 - The camera never pans, pushes, reframes, tracks, zooms, or creates depth.
 - Motion has no anticipation, follow-through, shared-element handoff, or subject-specific visual system.
 - Math appears as raw LaTeX, plain-text formulas, hand-spaced symbols, or unreadable subscripts instead of being rendered with a math-aware system.
+- Explainer scenes label completed diagrams instead of teaching through visible transformation.
 
 ## Pre-Build Discovery
 
@@ -53,6 +54,7 @@ Each beat in the storyboard must include:
 - **Gradient justification:** if using a gradient, name why it exists. Valid uses include a brand-owned asset, optical light effect, shader transition, heatmap/data encoding, or localized glow. Invalid use: making an empty frame look designed.
 - **Beauty recipe:** anticipation, primary action, follow-through, and continuing life. Missing any part requires a deliberate reason.
 - **Math renderer:** if math appears, name KaTeX, SVG, Canvas, Three.js, or another deliberate renderer plus the semantic reveal plan.
+- **Teaching proof:** if explaining an idea, name the learning objective, misconception, proof moment, attention order, and recall hook.
 
 ## Gradient Rules
 
@@ -110,4 +112,5 @@ Before showing the user a preview:
 - Catalog/components/visual systems used are recorded in `director.project.md`.
 - Snapshot findings are recorded in `director.project.md`, including math readability and consistency notes when relevant.
 - The storyboard or notes include why the video is not a slide deck.
+- The storyboard or notes include why the video teaches better than a static article or slide.
 - The final scan contains no generic gradient-first scenes.

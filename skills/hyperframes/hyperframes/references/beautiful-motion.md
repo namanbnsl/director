@@ -52,6 +52,7 @@ Do not start with background treatment. Start with the visual system.
 - Use arcs and curves for natural travel. Straight-line motion is fine for mechanical systems, but organic or premium pieces need curved paths, orbit, sweep, or camera motion.
 - Layer timing. Foreground leads, midground follows, background reacts; do not move all layers on the same frame.
 - Use silence/stillness only as contrast after motion, not because the scene has nothing to do.
+- In teaching videos, the most important conceptual change gets the most legible motion. Secondary delight must lag, echo, or respond; it must not compete.
 
 ## Timing And Easing
 
@@ -95,6 +96,7 @@ When building a beat, write this before the code:
 Beat:
 Shot:
 Primary visual system:
+Learning objective served:
 Anticipation:
 Primary action:
 Follow-through:
