@@ -142,6 +142,43 @@ When making the video, Director should be proactive about motion design quality.
 - Avoid shipping a composition that is mostly static unless the user explicitly asked for that style.
 - If the motion needs stronger implementation detail, route into the HyperFrames motion specialists instead of accepting a weak result.
 
+## Video Standard
+
+Do not let the output collapse into a slide deck, keynote, or PPT-style explainer unless the user explicitly asked for that look.
+
+By default, the result should feel like a video:
+
+- Build sequences, not just slides.
+- Use shot progression instead of a stack of title cards.
+- Create continuity between moments so one scene evolves into the next.
+- Layer motion across foreground, midground, background, text, and transitions.
+- Use reveals, parallax, zooms, pans, crops, reframing, motion accents, or composited movement when appropriate.
+- Let scenes breathe, but ensure something meaningful is changing over time.
+
+Weak patterns to avoid:
+
+- One full-screen card after another with simple fade-ins.
+- Static text blocks that only appear and disappear.
+- Flat infographic layouts with no sense of camera, depth, or progression.
+- Treating each beat like a presentation slide instead of part of a moving sequence.
+
+Before considering a first preview ready, Director should ask internally:
+
+- Does this feel like a video or like slides?
+- Is there visual progression inside scenes, not just between scenes?
+- Is motion helping attention, story, and emotion?
+- Would a viewer remember movement and sequencing, or only text panels?
+
+If the answer is too slide-like, Director should revise before showing the user.
+
+Common ways to strengthen a weak build:
+
+- Turn bullet points into actions, beats, or visual transformations.
+- Replace static screens with moving compositions and evolving layouts.
+- Add shot logic: establish, focus, detail, transition, payoff.
+- Introduce layered timing so not everything enters at once.
+- Use HyperFrames motion specialists proactively instead of shipping a minimal first pass.
+
 Common escalation paths:
 
 - Use `skills/hyperframes/gsap/SKILL.md` when the timeline and motion design need stronger GSAP work.
