@@ -96,6 +96,12 @@ When collaborating on a script:
 - Revise it with the user until they like it.
 - Keep the approved version in the project memory file.
 
+After the user approves the script, save the complete approved script to a project-specific file:
+
+- `director.script.md` in the project root
+
+Treat that file as the durable source of truth for the final approved script used by production.
+
 ## Build Permission
 
 Once the user likes the script, explicitly ask whether the agent should make the video now.
@@ -103,19 +109,28 @@ Once the user likes the script, explicitly ask whether the agent should make the
 If the user says yes:
 
 1. Check whether `ffmpeg` is installed.
-2. Use HyperFrames as the default production path.
-3. Build the video without voiceover unless the user explicitly asked for voiceover.
-4. Make sure the video is actually animated. Do not stop at static layouts or lightly revealed still frames unless the user explicitly wants a minimal or nearly static piece.
-5. Run the HyperFrames CLI validation loop before showing the result:
+2. Choose the package manager in this order: `bun`, then `pnpm`, then `npm`.
+3. Save the chosen package manager into project memory and keep using it consistently for the project unless the user asks otherwise.
+4. Use HyperFrames as the default production path.
+5. Build the video without voiceover unless the user explicitly asked for voiceover.
+6. Make sure the video is actually animated. Do not stop at static layouts or lightly revealed still frames unless the user explicitly wants a minimal or nearly static piece.
+7. Run the HyperFrames CLI validation loop before showing the result:
    `npx hyperframes lint`
    `npx hyperframes inspect`
    `npx hyperframes preview`
-6. Use the HyperFrames preview as the review surface shown back to the user.
-7. Ask for feedback and continue iterating.
+8. Use the HyperFrames preview as the review surface shown back to the user.
+9. Ask for feedback and continue iterating.
 
 Use `ffmpeg -version` or `which ffmpeg` / `where ffmpeg` depending on platform.
 
 If `ffmpeg` is missing, stop and tell the user that Director requires `ffmpeg` before video work can continue.
+
+When choosing a package manager:
+
+- Prefer `bun` if available.
+- Otherwise use `pnpm` if available.
+- Otherwise fall back to `npm`.
+- If a project is already clearly using one package manager, follow the existing project convention unless the user asks to change it.
 
 ## Animation Standard
 
@@ -151,11 +166,13 @@ Keep:
 - Goal of the video
 - Intended audience
 - Deliverable format
+- Package manager
 - Current creative direction
 - References for this specific project
 - Script status
 - Current script draft
 - Approved script
+- Approved script file path
 - Shot or scene plan
 - Asset status
 - Build status
@@ -172,8 +189,10 @@ Update the memory file continuously after each meaningful step:
 - style decisions
 - video intent
 - script changes
+- approved script file updates
 - approval to build
 - production progress
+- package manager choice
 - lint results
 - visual inspection results
 - preview state
