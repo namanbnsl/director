@@ -13,6 +13,8 @@ Creative direction for compositions when no `design.md` is provided. These are s
 These patterns are AI design tells — the first thing every LLM reaches for. If you're about to use one, pause and ask: is this a deliberate choice for THIS content, or am I defaulting?
 
 - Gradient text (`background-clip: text` + gradient)
+- Full-screen decorative gradients used as the scene's main visual
+- Repeated radial glows in every scene
 - Left-edge accent stripes on cards/callouts
 - Cyan-on-dark / purple-to-blue gradients / neon accents
 - Pure `#000` or `#fff` (tint toward your accent hue instead)
@@ -36,13 +38,15 @@ Every scene needs visual depth — persistent decorative elements that stay visi
 
 Ideas (mix and match, 2-5 per scene):
 
-- Radial glows (accent-tinted, low opacity, breathing scale)
+- Grain/noise overlays, geometric shapes, grid patterns, rules, registration marks
 - Ghost text (theme words at 3-8% opacity, very large, slow drift)
 - Accent lines (hairline rules, subtle pulse)
-- Grain/noise overlay, geometric shapes, grid patterns
+- Localized radial glows only when they behave like a light source behind a real subject
 - Thematic decoratives (orbit rings for space, vinyl grooves for music, grid lines for data)
 
 All decoratives should have slow ambient GSAP animation — breathing, drift, pulse. Static decoratives feel dead.
+
+Gradients are optional, not the house look. Prefer tangible visual material: real assets, diagrams, animated charts, footage, SVG paths, Canvas systems, composed product states, or 3D staging. If a frame looks good only because a gradient fills it, the frame is under-designed.
 
 **Decorative count vs motion count.** The "2-5 per scene" count refers to decorative _elements_. If a project's `design.md` says "single ambient motion per scene", it means one looping motion applied to these decoratives (a shared breath/drift/pulse) — not one element total. A scene with 4 decoratives sharing one breathing motion is correct; a scene with 1 decorative is under-dressed.
 

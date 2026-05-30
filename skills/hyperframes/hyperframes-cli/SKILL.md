@@ -35,6 +35,24 @@ Templates: `blank`, `warm-grain`, `play-mode`, `swiss-grid`, `vignelli`, `decisi
 
 When using `--tailwind`, invoke the `tailwind` skill before editing classes or theme tokens. The scaffold uses Tailwind v4.2 via the browser runtime, not Studio's Tailwind v3 setup.
 
+## Catalog Discovery
+
+Run catalog discovery before storyboarding or implementing any non-trivial video:
+
+```bash
+npx hyperframes catalog --type block
+npx hyperframes catalog --type template
+npx hyperframes catalog --type transition
+```
+
+Use catalog results for reusable blocks, visualizations, VFX, transitions, and templates instead of rebuilding generic cards or title slides from scratch. If the installed CLI does not support a catalog query, inspect local blocks as a fallback:
+
+```bash
+find registry/blocks -maxdepth 2 -type f 2>/dev/null
+```
+
+Record selected catalog items, or the reason none fit, in `director.project.md`.
+
 ## Linting
 
 ```bash

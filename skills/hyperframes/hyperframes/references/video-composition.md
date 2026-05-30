@@ -16,7 +16,7 @@ A beat with 3 elements looks empty. A beat with 8-10 feels alive.
 
 Every scene needs:
 
-- **Background texture** — radial glow, oversized ghost type, color panel, grain, grid. Never solid flat color.
+- **Background texture** — grain, grid, oversized ghost type, real image/video texture, SVG marks, color panels, or localized light effects. Never rely on a generic gradient as the whole visual idea.
 - **Midground content** — the actual message. Cards, stats, code blocks, images.
 - **Foreground accents** — dividers, labels, data bars, registration marks, monospace metadata. The details that make it feel produced, not generated.
 
@@ -29,6 +29,7 @@ Muted is fine. Flat is not. Every scene should have at least one color that pull
 - Brand accent should be VISIBLE — not a 5% opacity glow lost in compression. 15-25% for atmospheric, full saturation for focal elements.
 - **Light canvases work differently than dark.** On dark: accent glows pop naturally. On light: use bolder borders (2px+ solid), stronger structural elements (rules, dividers), and full-saturation accent hits. Light backgrounds need texture (subtle grain, patterns) to avoid the "blank slide" feel. Don't switch to dark — make light cinematic.
 - Tint neutrals toward the brand hue. Dead gray reads as undesigned.
+- Gradients are not color presence by themselves. If the scene is mostly gradient plus text, redesign it around an asset, visualization, component, footage, or camera move.
 
 ## Scale
 
@@ -52,6 +53,7 @@ Subtle reads as static at 30fps. Err toward more movement than feels safe.
 - Every decorative element should have ambient motion: breathe, drift, pulse, orbit. Static decoratives feel dead.
 - Vary motion per scene — don't repeat the same ambient pattern.
 - Scene entrances should use 3+ different eases and directions. If every element enters from `y: 30, opacity: 0`, the scene has no choreography.
+- Every beat needs a middle action after the entrance. The viewer should be able to describe what changed during the hold.
 
 ## Frame Composition
 
@@ -60,3 +62,4 @@ Subtle reads as static at 30fps. Err toward more movement than feels safe.
 - **Anchor to edges.** Pin content to left/top or right/bottom. Centered-and-floating is a web layout pattern.
 - **Split frames.** Data panel left, content right. Top bar with metadata, full-width below. Zone-based layouts over centered stacks.
 - **Structural elements.** Rules, dividers, border panels. They create visual paths and animate well (`scaleX: 0` → `1`).
+- **Shot framing.** Name whether the beat is a close-up, wide, push-in, pull-back, tracking move, orbit, overhead, or split-screen. A stack of centered panels is not shot framing.

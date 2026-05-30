@@ -97,6 +97,12 @@ Look at the HyperFrames catalog first when it is relevant.
 
 - Use the HyperFrames catalog and related CLI/docs before building common blocks from scratch.
 - Prefer existing catalog items for reusable overlays, data visualizations, transitions, and other established visual patterns.
+- For any non-trivial new HyperFrames video, run catalog discovery before storyboarding:
+  - `npx hyperframes catalog --type block`
+  - `npx hyperframes catalog --type template`
+  - `npx hyperframes catalog --type transition`
+- If catalog discovery is unavailable, inspect `registry/blocks/` manually and record that limitation in `director.project.md`.
+- A finished video should name the catalog items, captured assets, external libraries, or custom visual systems it used. If it used none, it must explain why and still include a purpose-built visual system.
 
 When looking on the web, prefer trustworthy sources:
 
@@ -149,12 +155,15 @@ If the user says yes:
 5. Build the video without voiceover unless the user explicitly asked for voiceover.
 6. Make sure the video is actually animated. Do not stop at static layouts or lightly revealed still frames unless the user explicitly wants a minimal or nearly static piece.
 7. If the video needs specialized visual systems, proactively check the HyperFrames catalog first, then research external libraries or references on the web if needed.
-8. Run the HyperFrames CLI validation loop before showing the result:
+8. Apply the HyperFrames anti-slop gate before writing HTML and before preview: `skills/hyperframes/hyperframes/references/anti-slop-gate.md`.
+9. Apply the beautiful-motion direction before writing HTML: `skills/hyperframes/hyperframes/references/beautiful-motion.md`.
+10. Run the HyperFrames CLI validation loop before showing the result:
    `npx hyperframes lint`
+   `npx hyperframes validate`
    `npx hyperframes inspect`
    `npx hyperframes preview`
-9. Use the HyperFrames preview as the review surface shown back to the user.
-10. Ask for feedback and continue iterating.
+11. Use the HyperFrames preview as the review surface shown back to the user.
+12. Ask for feedback and continue iterating.
 
 Use `ffmpeg -version` or `which ffmpeg` / `where ffmpeg` depending on platform.
 
@@ -178,6 +187,10 @@ When making the video, Director should be proactive about motion design quality.
 - If the motion needs stronger implementation detail, route into the HyperFrames motion specialists instead of accepting a weak result.
 - Do not be scared of complex GSAP or Lottie-driven motion when it is the right answer.
 - Use richer animation systems confidently when they materially improve pacing, clarity, or production value.
+- Every scene needs motion during the middle of the beat, not just an entrance. Count-ups, camera drift, path drawing, chart growth, parallax, scrubbed footage, 3D orbit, canvas evolution, and state changes all count. A static hold after a text reveal does not.
+- Every major beat should have anticipation, primary action, follow-through, and continuing life. The viewer should feel authored timing, not template movement.
+- Motion should be custom to the subject: data behaves like data, architecture behaves like a system, product UI changes state, and abstract motion reacts to the story.
+- Before preview, run `node skills/hyperframes/hyperframes/scripts/animation-map.mjs . --frames 6` when dependencies are available, or manually audit the timeline and record the motion proof in `director.project.md`.
 
 ## Video Standard
 
@@ -198,6 +211,10 @@ Weak patterns to avoid:
 - Static text blocks that only appear and disappear.
 - Flat infographic layouts with no sense of camera, depth, or progression.
 - Treating each beat like a presentation slide instead of part of a moving sequence.
+- Generic gradient backgrounds carrying otherwise empty scenes.
+- Centered web-page panels with small UI text, decorative shadows, and no camera move.
+- Reusing the same `y: 30, opacity: 0` entrance pattern across most elements.
+- Building everything from text, cards, and vague decorative shapes while ignoring catalog components, captured assets, charts, diagrams, footage, SVG, Canvas, Lottie, Three.js, or shader systems.
 
 Before considering a first preview ready, Director should ask internally:
 
@@ -218,6 +235,9 @@ Common ways to strengthen a weak build:
 - Use complex GSAP timelines when a simple entrance/exit pattern is not enough.
 - Use Lottie when a crafted motion asset will beat a weak hand-built approximation.
 - Use HyperFrames motion specialists proactively instead of shipping a minimal first pass.
+- Replace generic gradients with tangible visuals: real art, catalog blocks, footage, composed UI state changes, charts, architecture diagrams, SVG path drawing, Canvas systems, or 3D staging.
+- Add shot language to the storyboard: close-up, wide, tracking, push-in, pull-back, overhead, orbit, fly-through, or split-screen. If every beat is a front-facing centered layout, it is not ready.
+- Use shared-element transitions and match cuts so scenes feel connected: an object, path, number, card, node, or camera move should carry the viewer into the next beat.
 
 Director should not be scared of 3D. If 3D is the right answer, use it or route to the skill that will.
 

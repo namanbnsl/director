@@ -25,7 +25,8 @@ Produce a clear 3D sequence plan covering:
 2. Identify where flat motion is not enough.
 3. Propose 3D moments that meaningfully improve clarity, drama, or spatial understanding.
 4. Keep the sequence grounded in the actual script and pacing.
-5. Write the chosen 3D plan back into `director.project.md`.
+5. Specify camera language for each 3D beat: orbit, dolly, truck, crane, push-in, pull-back, fly-through, rack focus, or parallax layer move.
+6. Write the chosen 3D plan back into `director.project.md`.
 
 ## Guidance
 
@@ -33,3 +34,4 @@ Produce a clear 3D sequence plan covering:
 - Use 3D when it clarifies structure, adds cinematic value, or makes the visual story feel more like a real video.
 - Avoid decorative 3D that does not help the piece.
 - Route to `skills/hyperframes/three/SKILL.md` when implementation should happen in Three.js.
+- A 3D beat must have camera motion or spatial transformation. A static tilted card in perspective does not count.

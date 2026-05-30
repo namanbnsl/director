@@ -42,7 +42,23 @@ Always run on every composition (except single-scene pieces and trivial edits). 
 
 Read [references/prompt-expansion.md](references/prompt-expansion.md) for the full process and output format.
 
-### Step 3: Plan
+### Step 3: Catalog and Anti-Slop Gate
+
+For any non-trivial new multi-scene video, read [references/anti-slop-gate.md](references/anti-slop-gate.md) before writing storyboard beats or HTML.
+
+Also read [references/beautiful-motion.md](references/beautiful-motion.md) when the work needs to feel polished, cinematic, premium, or custom. Use it to design the motion system before writing CSS.
+
+Run catalog discovery first:
+
+```bash
+npx hyperframes catalog --type block
+npx hyperframes catalog --type template
+npx hyperframes catalog --type transition
+```
+
+If the installed CLI does not support one of these commands, inspect `registry/blocks/` manually and record the limitation in the project notes. Choose at least one catalog block, reusable pattern, captured asset, external library, or custom visual system for the piece. A video made only of text, cards, panels, and decorative gradients fails this step.
+
+### Step 4: Plan
 
 Before writing HTML, think at a high level:
 
@@ -52,6 +68,8 @@ Before writing HTML, think at a high level:
 4. **Timing** — which clips drive the duration, where do transitions land, what's the pacing.
 5. **Layout** — build the end-state first. See "Layout Before Animation" below.
 6. **Animate** — then add motion using the rules below.
+7. **Motion proof** — for each scene, name the build motion, mid-beat evolution, and transition/camera handoff. Do this before writing GSAP.
+8. **Beauty proof** — name the anticipation, primary action, follow-through, continuing life, and shared element or handoff for each major beat.
 
 **Build what was asked.** A request for "a title card" is not a request for "a title card + 3 supporting scenes + ambient music + captions." Every scene, every element, every tween should earn its place. If additional scenes or elements would genuinely improve the piece, propose them — don't add them.
 
@@ -352,7 +370,13 @@ tl.from("#s2-heading", { x: -40, opacity: 0, duration: 0.6, ease: "expo.out" }, 
 - Offset first animation 0.1-0.3s (not t=0)
 - Vary eases across entrance tweens — use at least 3 different eases per scene
 - Don't repeat an entrance pattern within a scene
-- Avoid full-screen linear gradients on dark backgrounds (H.264 banding — use radial or solid + localized glow)
+- Avoid full-screen decorative gradients as a default style. Use gradients only for brand-owned assets, optical light effects, shader transitions, heatmaps/data encodings, or localized glows that support a tangible visual.
+- No gradient text.
+- Every beat needs mid-beat evolution after the entrance: camera movement, count-up, path drawing, chart growth, parallax, footage, 3D orbit, canvas redraw, state change, or another meaningful change.
+- Multi-scene videos need shot language, not just layouts: close-up, wide, tracking, push-in, pull-back, overhead, orbit, fly-through, or split-screen.
+- Every major beat needs anticipation and follow-through. Main objects should not simply appear, move, and stop.
+- Use shared-element or subject-specific transitions where possible: a node becomes a chart point, a card becomes a detail view, a line becomes a path, a product state becomes the next scene.
+- Use arcs, paths, depth, or camera motion for important movement. Straight-line movement is for deliberate mechanical systems, not the default.
 - 60px+ headlines, 20px+ body, 16px+ data labels for rendered video
 - `font-variant-numeric: tabular-nums` on number columns
 
@@ -379,6 +403,8 @@ If no `design.md` exists, follow [house-style.md](./house-style.md) for aestheti
 
 - [ ] `npx hyperframes lint` and `npx hyperframes validate` both pass
 - [ ] Design adherence verified if design.md exists
+- [ ] Anti-slop gate passed: catalog/assets/visual systems used, gradient use justified, and the result is not a slide deck
+- [ ] Beauty proof passed: major beats have anticipation, primary action, follow-through, continuing life, and a custom visual system
 
 **Slow (run in parallel while presenting the preview to the user):**
 
@@ -444,7 +470,7 @@ If no `design.md` exists (house-style-only path), verify:
 After authoring animations, run the animation map to verify choreography:
 
 ```bash
-node skills/hyperframes/scripts/animation-map.mjs <composition-dir> \
+node skills/hyperframes/hyperframes/scripts/animation-map.mjs <composition-dir> \
   --out <composition-dir>/.hyperframes/anim-map
 ```
 
@@ -474,6 +500,8 @@ Skip on small edits (fixing a color, adjusting one duration). Run on new composi
 - **[references/typography.md](references/typography.md)** — Typography: font pairing, OpenType features, dark-background adjustments, font discovery script. **Always read** — every composition has text.
 - **[references/motion-principles.md](references/motion-principles.md)** — Motion design principles, image motion treatment, load-bearing GSAP rules. **Always read** — every composition has motion.
 - **[references/techniques.md](references/techniques.md)** — 11 visual techniques with code patterns: SVG drawing, Canvas 2D, CSS 3D, kinetic type, Lottie, video compositing, typing effect, variable fonts, MotionPath, velocity transitions, audio-reactive. Read when planning techniques per beat.
+- **[references/anti-slop-gate.md](references/anti-slop-gate.md)** — Catalog discovery, gradient restrictions, motion proof, and final readiness checks. **Always read for non-trivial multi-scene videos.**
+- **[references/beautiful-motion.md](references/beautiful-motion.md)** — Research-backed craft direction for anticipation, follow-through, shared elements, custom visual systems, timing, easing, and cinematic choreography.
 - **[references/narration.md](references/narration.md)** — Pacing, tone, script structure, number pronunciation, opening line patterns. Read when the composition includes voiceover or TTS.
 - **[references/design-picker.md](references/design-picker.md)** — Create a design.md via visual picker. Read when no design.md exists and the user wants to create one.
 - **[visual-styles.md](visual-styles.md)** — 8 named visual styles with hex palettes, GSAP easing signatures, and shader pairings. Read when user names a style or when generating design.md.

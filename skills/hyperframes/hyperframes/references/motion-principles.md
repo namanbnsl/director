@@ -13,6 +13,12 @@ You know these rules but you violate them. Stop.
 
 ## What You Don't Do Without Being Told
 
+### Anticipation and follow-through make motion feel authored
+
+Every important action needs a small preparation and a small aftermath. A node can pulse before it launches a packet. A chart bar can compress before it grows. A camera can drift backward before a push-in. After the main action, secondary parts should settle: labels lag, shadows catch up, particles continue, connectors pulse, or the object overshoots and corrects.
+
+Without anticipation and follow-through, HyperFrames output looks like a template applying transforms to boxes.
+
 ### Easing is emotion, not technique
 
 The transition is the verb. The easing is the adverb. A slide-in with `expo.out` = confident. With `sine.inOut` = dreamy. With `elastic.out` = playful. Same motion, different meaning. Choose the adverb deliberately.
