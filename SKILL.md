@@ -19,7 +19,7 @@ Director should be proactive and move the project forward in this order:
 6. Once the user likes the script, ask whether the agent should make the video now.
 7. If yes, start building the video in HyperFrames.
 8. Do not add voiceover unless the user explicitly wants voiceover.
-9. Preview the result.
+9. Lint, visually inspect, and preview the result with HyperFrames before showing it to the user.
 10. Ask for feedback and continue iterating.
 
 At every step, update the project memory file so the current state of the video is never lost.
@@ -105,12 +105,34 @@ If the user says yes:
 1. Check whether `ffmpeg` is installed.
 2. Use HyperFrames as the default production path.
 3. Build the video without voiceover unless the user explicitly asked for voiceover.
-4. Preview the result.
-5. Ask for feedback and continue iterating.
+4. Make sure the video is actually animated. Do not stop at static layouts or lightly revealed still frames unless the user explicitly wants a minimal or nearly static piece.
+5. Run the HyperFrames CLI validation loop before showing the result:
+   `npx hyperframes lint`
+   `npx hyperframes inspect`
+   `npx hyperframes preview`
+6. Use the HyperFrames preview as the review surface shown back to the user.
+7. Ask for feedback and continue iterating.
 
 Use `ffmpeg -version` or `which ffmpeg` / `where ffmpeg` depending on platform.
 
 If `ffmpeg` is missing, stop and tell the user that Director requires `ffmpeg` before video work can continue.
+
+## Animation Standard
+
+When making the video, Director should be proactive about motion design quality.
+
+- Treat animation as part of the deliverable, not as optional polish.
+- Build clear scene rhythm, entrances, exits, transitions, and emphasis beats.
+- Make movement support the script, pacing, and visual hierarchy.
+- Avoid shipping a composition that is mostly static unless the user explicitly asked for that style.
+- If the motion needs stronger implementation detail, route into the HyperFrames motion specialists instead of accepting a weak result.
+
+Common escalation paths:
+
+- Use `skills/hyperframes/gsap/SKILL.md` when the timeline and motion design need stronger GSAP work.
+- Use `skills/hyperframes/waapi/SKILL.md` when WAAPI is the right engine for deterministic motion.
+- Use `skills/hyperframes/typegpu/SKILL.md` when the piece needs shader-driven or GPU-native motion.
+- Use `skills/hyperframes/lottie/SKILL.md` when animation should come from Lottie assets.
 
 ## Project Memory
 
@@ -137,6 +159,8 @@ Keep:
 - Shot or scene plan
 - Asset status
 - Build status
+- Lint status
+- Visual inspect status
 - Preview status
 - Edit notes
 - User feedback
@@ -150,6 +174,8 @@ Update the memory file continuously after each meaningful step:
 - script changes
 - approval to build
 - production progress
+- lint results
+- visual inspection results
 - preview state
 - feedback
 - next iteration plan
@@ -200,7 +226,7 @@ Route to HyperFrames when the work is HTML-video composition or animation:
 
 Use other HyperFrames specialists when the implementation path is already clear:
 
-- Use `skills/hyperframes/hyperframes-cli/SKILL.md` for HyperFrames CLI workflows such as init, inspect, lint, preview, validate, and render.
+- Use `skills/hyperframes/hyperframes-cli/SKILL.md` for HyperFrames CLI workflows such as init, inspect, lint, preview, validate, and render. Use this skill before showing any HyperFrames build to the user.
 - Use `skills/hyperframes/hyperframes-media/SKILL.md` for preprocessing tasks such as voice, transcription, background removal or other media prep steps handled by that skill.
 - Use `skills/hyperframes/website-to-hyperframes/SKILL.md` when adapting an existing website or webpage into a HyperFrames composition.
 - Use `skills/hyperframes/three/SKILL.md` for Three.js-based 3D scenes inside HyperFrames.
