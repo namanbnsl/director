@@ -20,7 +20,8 @@ Before starting any video work:
 3. If no style exists yet, ask the user whether they want their style saved globally or only for this project.
 4. Ask for the video style.
 5. Save the style in the chosen location.
-6. Check whether `ffmpeg` is installed before continuing.
+6. Create or update a project-specific memory file for the current video.
+7. Check whether `ffmpeg` is installed before continuing.
 
 If no style exists yet, ask:
 
@@ -56,6 +57,33 @@ Save location:
 
 If a style already exists, use it automatically unless the user asks to update it.
 
+## Project Memory
+
+For every active video project, create and maintain a project-only working memory file. Never store project memory in the global style file.
+
+Use this path:
+
+- `director.project.md` in the project root
+
+This file should track the current video only. Update it as the project evolves.
+
+Keep:
+
+- Project name or working title
+- Goal of the video
+- Intended audience
+- Deliverable format
+- Current creative direction
+- References for this specific project
+- Script status
+- Shot or scene plan
+- Asset status
+- Edit notes
+- Open questions
+- Next steps
+
+If a global style exists, use it as background taste. The project memory file should only contain project-specific decisions and progress.
+
 After loading or saving style, check for `ffmpeg`.
 
 Use `ffmpeg -version` or `which ffmpeg` / `where ffmpeg` depending on platform.
@@ -86,3 +114,31 @@ Project styles should capture:
 - References.
 - Formats and tools.
 - Things to avoid.
+
+## When To Use Which Skill
+
+Director is the orchestrator. Use it to establish style, maintain project memory, choose the right workflow, and keep the video moving toward a finished result.
+
+Route to a specialist skill when the task becomes narrow:
+
+- Use `skills/concept-package/SKILL.md` when the user has an idea but not yet a strong concept, hook, audience framing, or treatment.
+- Use `skills/storyboard-planner/SKILL.md` when the concept exists and the next need is scene structure, beat flow, shot planning, or visual sequencing.
+- Use `skills/edit-critic/SKILL.md` when the user has a rough cut, animatic, sequence, or nearly finished edit and wants revision notes.
+
+Route to HyperFrames when the work is HTML-video composition or animation:
+
+- Use `skills/hyperframes/hyperframes/SKILL.md` for overall HyperFrames composition work: scenes, overlays, captions, transitions, voiceover-driven visuals, and general HTML video assembly.
+- Use `skills/hyperframes/typegpu/SKILL.md` when the composition needs shaders, WebGPU, TypeGPU, particle systems, liquid-glass effects, or other GPU-driven rendering.
+- Use `skills/hyperframes/waapi/SKILL.md` when the motion is best expressed with the Web Animations API and needs deterministic seeking inside HyperFrames.
+- Use `skills/hyperframes/lottie/SKILL.md` when the composition depends on Lottie or dotLottie assets.
+
+Use other HyperFrames specialists when the implementation path is already clear:
+
+- Use `skills/hyperframes/hyperframes-cli/SKILL.md` for HyperFrames CLI workflows such as init, inspect, lint, preview, validate, and render.
+- Use `skills/hyperframes/hyperframes-media/SKILL.md` for preprocessing tasks such as voice, transcription, background removal or other media prep steps handled by that skill.
+- Use `skills/hyperframes/website-to-hyperframes/SKILL.md` when adapting an existing website or webpage into a HyperFrames composition.
+- Use `skills/hyperframes/three/SKILL.md` for Three.js-based 3D scenes inside HyperFrames.
+- Use `skills/hyperframes/gsap/SKILL.md` when GSAP is the main animation engine and the task is specifically about timeline behavior or animation construction.
+- Use `skills/hyperframes/animejs/SKILL.md` when Anime.js is the intended animation engine.
+- Use `skills/hyperframes/css-animations/SKILL.md` when the motion should be driven primarily by CSS animations.
+- Use `skills/hyperframes/tailwind/SKILL.md` when the composition is built with Tailwind-based styling conventions.
