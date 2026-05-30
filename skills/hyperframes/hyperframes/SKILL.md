@@ -48,6 +48,10 @@ For any non-trivial new multi-scene video, read [references/anti-slop-gate.md](r
 
 Also read [references/beautiful-motion.md](references/beautiful-motion.md) when the work needs to feel polished, cinematic, premium, or custom. Use it to design the motion system before writing CSS.
 
+If the composition contains math, formulas, equations, notation, proofs, or derivations, read [references/math-rendering.md](references/math-rendering.md) and choose KaTeX, SVG, Canvas, or Three.js before writing the scene.
+
+For every multi-scene composition, read [references/consistency-pass.md](references/consistency-pass.md) and define the palette, type, shape, depth, motion, shot, and motif system before implementation.
+
 Run catalog discovery first:
 
 ```bash
@@ -70,6 +74,8 @@ Before writing HTML, think at a high level:
 6. **Animate** — then add motion using the rules below.
 7. **Motion proof** — for each scene, name the build motion, mid-beat evolution, and transition/camera handoff. Do this before writing GSAP.
 8. **Beauty proof** — name the anticipation, primary action, follow-through, continuing life, and shared element or handoff for each major beat.
+9. **Consistency proof** — name what stays consistent across scenes: palette, type scale, shape language, motion physics, transition family, visual motif.
+10. **Math proof** — if math appears, name the renderer and semantic reveal plan.
 
 **Build what was asked.** A request for "a title card" is not a request for "a title card + 3 supporting scenes + ambient music + captions." Every scene, every element, every tween should earn its place. If additional scenes or elements would genuinely improve the piece, propose them — don't add them.
 
@@ -377,8 +383,19 @@ tl.from("#s2-heading", { x: -40, opacity: 0, duration: 0.6, ease: "expo.out" }, 
 - Every major beat needs anticipation and follow-through. Main objects should not simply appear, move, and stop.
 - Use shared-element or subject-specific transitions where possible: a node becomes a chart point, a card becomes a detail view, a line becomes a path, a product state becomes the next scene.
 - Use arcs, paths, depth, or camera motion for important movement. Straight-line movement is for deliberate mechanical systems, not the default.
+- Keep motion professional yet fun: use controlled playful moments such as tactile overshoot, clever match cuts, delightful state changes, kinetic type accents, or expressive but justified transitions. Never solve "fun" with random palettes, inconsistent fonts, or chaotic effects.
 - 60px+ headlines, 20px+ body, 16px+ data labels for rendered video
 - `font-variant-numeric: tabular-nums` on number columns
+
+## Math Rendering
+
+Math is a first-class visual system. If a scene includes equations, formulas, proof steps, matrix/vector notation, charts derived from equations, or algorithmic notation:
+
+- Use [references/math-rendering.md](references/math-rendering.md).
+- Prefer KaTeX for symbolic math, SVG for diagrams/geometry, and Canvas or Three.js for dynamic/spatial math.
+- Do not hand-space raw LaTeX or plain-text formulas.
+- Reveal equations semantically by term, operator, transformation, or result.
+- Pair dense math with a graph, diagram, number line, matrix grid, loss surface, or other visual explanation.
 
 If no `design.md` exists, follow [house-style.md](./house-style.md) for aesthetic defaults.
 
@@ -405,10 +422,13 @@ If no `design.md` exists, follow [house-style.md](./house-style.md) for aestheti
 - [ ] Design adherence verified if design.md exists
 - [ ] Anti-slop gate passed: catalog/assets/visual systems used, gradient use justified, and the result is not a slide deck
 - [ ] Beauty proof passed: major beats have anticipation, primary action, follow-through, continuing life, and a custom visual system
+- [ ] Consistency pass completed across palette, typography, shape, depth, motion, transitions, and motifs
+- [ ] Math rendering pass completed if math appears
 
 **Slow (run in parallel while presenting the preview to the user):**
 
 - [ ] `npx hyperframes inspect` passes, or every reported overflow is intentionally marked
+- [ ] `npx hyperframes snapshot` captures reviewed hero frames and transition frames
 - [ ] Contrast warnings addressed (see Quality Checks below)
 - [ ] Animation choreography verified (see Quality Checks below)
 
@@ -428,6 +448,36 @@ Failures usually mean text is spilling out of a bubble/card, a fixed-size label 
 Use `--samples 15` for dense videos and `--at 1.5,4,7.25` for specific hero frames. Repeated static issues are collapsed by default to avoid flooding agent context. If overflow is intentional for an entrance/exit animation, mark the element or ancestor with `data-layout-allow-overflow`. If a decorative element should never be audited, mark it with `data-layout-ignore`.
 
 `hyperframes layout` is the compatibility alias for the same check.
+
+### Snapshot Review
+
+`hyperframes snapshot` captures real 1920x1080 PNG frames without a full render. Use it for complete visual inspection, not just layout auditing.
+
+```bash
+npx hyperframes snapshot <project-dir> --frames 10
+npx hyperframes snapshot <project-dir> --at 2.9,10.4,18.7
+```
+
+For every non-trivial video, capture:
+
+- evenly spaced frames with `--frames 10`,
+- each scene's hero frame,
+- transition midpoint frames,
+- dense math or data moments,
+- final CTA or closing frame.
+
+Review the PNGs in `snapshots/` before preview. Check:
+
+- actual visual quality, not just DOM validity,
+- scene-to-scene consistency,
+- text and math readability,
+- raw LaTeX or broken math rendering,
+- accidental gradient-heavy scenes,
+- off-brand or mismatched type/radius/shadow styles,
+- awkward crop, overlap, or visual imbalance,
+- whether frames look like a video still rather than a slide.
+
+Record the snapshot paths and findings in `director.project.md`. If any snapshot looks like a bad slide, revise before showing the user.
 
 ### Contrast
 
@@ -464,6 +514,10 @@ If no `design.md` exists (house-style-only path), verify:
 
 1. **Palette consistency** — the same bg, fg, and accent colors are used across all scenes. No per-scene color invention.
 2. **No lazy defaults** — check the composition against house-style.md's "Lazy Defaults to Question" list. If any appear, they must be a deliberate choice for the content, not a default.
+
+### Consistency Pass
+
+Use [references/consistency-pass.md](references/consistency-pass.md). Compare the implementation and snapshots against the declared palette, type, shape, depth, motion, shot, and motif system. Fix style drift before adding more polish.
 
 ### Animation Map
 
@@ -502,6 +556,8 @@ Skip on small edits (fixing a color, adjusting one duration). Run on new composi
 - **[references/techniques.md](references/techniques.md)** — 11 visual techniques with code patterns: SVG drawing, Canvas 2D, CSS 3D, kinetic type, Lottie, video compositing, typing effect, variable fonts, MotionPath, velocity transitions, audio-reactive. Read when planning techniques per beat.
 - **[references/anti-slop-gate.md](references/anti-slop-gate.md)** — Catalog discovery, gradient restrictions, motion proof, and final readiness checks. **Always read for non-trivial multi-scene videos.**
 - **[references/beautiful-motion.md](references/beautiful-motion.md)** — Research-backed craft direction for anticipation, follow-through, shared elements, custom visual systems, timing, easing, and cinematic choreography.
+- **[references/math-rendering.md](references/math-rendering.md)** — KaTeX/SVG/Canvas/Three.js rules for equations, formulas, proofs, derivations, notation, and math visuals.
+- **[references/consistency-pass.md](references/consistency-pass.md)** — Scene-to-scene consistency checks for palette, type, shape, depth, motion, shot language, transitions, and motifs.
 - **[references/narration.md](references/narration.md)** — Pacing, tone, script structure, number pronunciation, opening line patterns. Read when the composition includes voiceover or TTS.
 - **[references/design-picker.md](references/design-picker.md)** — Create a design.md via visual picker. Read when no design.md exists and the user wants to create one.
 - **[visual-styles.md](visual-styles.md)** — 8 named visual styles with hex palettes, GSAP easing signatures, and shader pairings. Read when user names a style or when generating design.md.

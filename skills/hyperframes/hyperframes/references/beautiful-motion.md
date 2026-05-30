@@ -85,6 +85,7 @@ These usually make HyperFrames output look like AI-generated presentation art:
 - A camera that never moves.
 - Motion that starts without anticipation and stops without follow-through.
 - Effects that are not tied to the subject: glow, blur, particles, noise, or chromatic aberration with no story role.
+- Fun expressed as random inconsistency: sudden new fonts, new palette, new border radius, or new physics without a story reason.
 
 ## Implementation Pattern
 
@@ -100,6 +101,7 @@ Follow-through:
 Continuing life:
 Shared element / transition handoff:
 Custom asset/catalog/library used:
+Consistency anchor:
 Why this is not a slide:
 ```
 

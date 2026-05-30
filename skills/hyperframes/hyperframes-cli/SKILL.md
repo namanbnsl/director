@@ -1,6 +1,6 @@
 ---
 name: hyperframes-cli
-description: HyperFrames CLI dev loop — `npx hyperframes` for scaffolding (init), validation (lint, inspect), preview, render, and environment troubleshooting (doctor, browser, info, upgrade). Use when running any of these commands or troubleshooting the HyperFrames build/render environment. For asset preprocessing commands (`tts`, `transcribe`, `remove-background`), invoke the `hyperframes-media` skill instead.
+description: HyperFrames CLI dev loop — `npx hyperframes` for scaffolding (init), validation (lint, inspect), snapshot, preview, render, and environment troubleshooting (doctor, browser, info, upgrade). Use when running any of these commands or troubleshooting the HyperFrames build/render environment. For asset preprocessing commands (`tts`, `transcribe`, `remove-background`), invoke the `hyperframes-media` skill instead.
 ---
 
 # HyperFrames CLI
@@ -13,10 +13,11 @@ Everything runs through `npx hyperframes`. Requires Node.js >= 22 and FFmpeg.
 2. **Write** — author HTML composition (see the `hyperframes` skill)
 3. **Lint** — `npx hyperframes lint`
 4. **Visual inspect** — `npx hyperframes inspect`
-5. **Preview** — `npx hyperframes preview`
-6. **Render** — `npx hyperframes render`
+5. **Snapshot review** — `npx hyperframes snapshot`
+6. **Preview** — `npx hyperframes preview`
+7. **Render** — `npx hyperframes render`
 
-Lint and inspect before preview. `lint` catches missing `data-composition-id`, overlapping tracks, and unregistered timelines. `inspect` opens the rendered composition in headless Chrome, seeks through the timeline, and reports text spilling out of bubbles/containers or off the canvas.
+Lint, inspect, and snapshot before preview. `lint` catches missing `data-composition-id`, overlapping tracks, and unregistered timelines. `inspect` opens the rendered composition in headless Chrome, seeks through the timeline, and reports text spilling out of bubbles/containers or off the canvas. `snapshot` captures actual PNG frames so the agent can inspect whether the video looks good, consistent, and cinematic.
 
 ## Scaffolding
 
@@ -84,6 +85,29 @@ Use this after `lint` and `validate`, especially for compositions with speech bu
 Errors should be fixed before rendering. Warnings are surfaced for agent review; add `--strict` to fail on warnings too. Repeated static issues are collapsed by default so JSON output stays compact for LLM context windows. If overflow is intentional for an entrance/exit animation, mark the element or ancestor with `data-layout-allow-overflow`. If a decorative element should never be audited, mark it with `data-layout-ignore`.
 
 `npx hyperframes layout` remains available as a compatibility alias for the same visual inspection pass.
+
+## Snapshot Review
+
+Use `snapshot` to verify actual visual output without a full render:
+
+```bash
+npx hyperframes snapshot my-project --at 2.9,10.4,18.7
+npx hyperframes snapshot my-project --frames 10
+```
+
+The command bundles the project, serves it locally, launches headless Chrome, seeks to each timestamp, and writes 1920x1080 PNGs into `snapshots/`.
+
+Flags:
+
+| Flag        | Description                                                    |
+| ----------- | -------------------------------------------------------------- |
+| `--frames`  | Number of evenly spaced frames to capture, default 5           |
+| `--at`      | Comma-separated timestamps in seconds, such as `3.0,10.5,18.0` |
+| `--timeout` | Ms to wait for runtime to initialize, default 5000             |
+
+For complete visual inspection, capture both evenly spaced frames and specific hero/transition frames. Review the PNGs in `snapshots/` for consistency, math readability, text clipping, ugly gradients, slide-like compositions, awkward crops, and whether the frame looks like a real video still.
+
+Record snapshot findings in `director.project.md` before previewing.
 
 ## Previewing
 

@@ -36,3 +36,4 @@ Produce a data-visual plan that covers:
 - Route to HyperFrames specialists for implementation once the visual logic is chosen.
 - Do not use generic cards plus numbers as the whole visualization. Pair every number with a moving visual form that makes the quantity tangible.
 - Prefer SVG, Canvas, CSS shapes, or a catalog visualization block over static chart screenshots.
+- If the data story includes formulas, statistical notation, equations, or derivations, route through `skills/hyperframes/hyperframes/references/math-rendering.md` and render math with KaTeX/SVG/Canvas/Three.js rather than plain text.

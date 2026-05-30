@@ -35,3 +35,4 @@ Produce an architecture visualization plan with:
 - Do not be scared of transformer or model-architecture visuals; they are a first-class use case.
 - Do not turn architecture into a labeled slide. Each beat should show a change in the system: data moves, layers unfold, dependencies light up, or the camera reframes from overview to detail.
 - Use catalog blocks, SVG path drawing, Canvas, Three.js, or composed diagram components when they improve clarity.
+- If architecture includes algorithmic notation, equations, tensor shapes, matrix operations, or model math, use `skills/hyperframes/hyperframes/references/math-rendering.md` so symbols render crisply and animate semantically.
