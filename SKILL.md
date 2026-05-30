@@ -82,6 +82,40 @@ Capture:
 
 If the request is vague, ask focused follow-ups and help the user narrow it down.
 
+## Research And Reuse
+
+When the video needs specialized visuals such as charts, diagrams, scientific figures, product UI mocks, maps, timelines, or transformer architectures, Director should not default to inventing everything from scratch.
+
+Before building those elements:
+
+1. Check whether HyperFrames already has a suitable catalog item or block.
+2. If not, look for an appropriate external library, dataset, or reference on the web.
+3. Prefer established, well-documented libraries over ad hoc custom implementations when they will improve quality or speed.
+4. Use the narrowest dependency that solves the actual visual problem.
+
+Look at the HyperFrames catalog first when it is relevant.
+
+- Use the HyperFrames catalog and related CLI/docs before building common blocks from scratch.
+- Prefer existing catalog items for reusable overlays, data visualizations, transitions, and other established visual patterns.
+
+When looking on the web, prefer trustworthy sources:
+
+- Official library documentation
+- Official project repositories
+- Primary documentation for charting, diagramming, math, or visualization libraries
+
+Examples of when web/library research is appropriate:
+
+- Better charting or animated data visualization
+- Diagram or flowchart rendering
+- Transformer and model architecture visuals
+- Timeline, map, graph, or network visualization
+- Domain-specific visual systems that are already solved well by an existing library
+
+Do not add a dependency just because it exists. Add one when it meaningfully improves the resulting video or avoids a weak custom build.
+
+If 3D, charts, or architecture-style visuals would materially improve the video, Director should use them confidently instead of avoiding them.
+
 ## Script Workflow
 
 After the video intent is clear, ask whether the user already has a script.
@@ -114,12 +148,13 @@ If the user says yes:
 4. Use HyperFrames as the default production path.
 5. Build the video without voiceover unless the user explicitly asked for voiceover.
 6. Make sure the video is actually animated. Do not stop at static layouts or lightly revealed still frames unless the user explicitly wants a minimal or nearly static piece.
-7. Run the HyperFrames CLI validation loop before showing the result:
+7. If the video needs specialized visual systems, proactively check the HyperFrames catalog first, then research external libraries or references on the web if needed.
+8. Run the HyperFrames CLI validation loop before showing the result:
    `npx hyperframes lint`
    `npx hyperframes inspect`
    `npx hyperframes preview`
-8. Use the HyperFrames preview as the review surface shown back to the user.
-9. Ask for feedback and continue iterating.
+9. Use the HyperFrames preview as the review surface shown back to the user.
+10. Ask for feedback and continue iterating.
 
 Use `ffmpeg -version` or `which ffmpeg` / `where ffmpeg` depending on platform.
 
@@ -141,6 +176,8 @@ When making the video, Director should be proactive about motion design quality.
 - Make movement support the script, pacing, and visual hierarchy.
 - Avoid shipping a composition that is mostly static unless the user explicitly asked for that style.
 - If the motion needs stronger implementation detail, route into the HyperFrames motion specialists instead of accepting a weak result.
+- Do not be scared of complex GSAP or Lottie-driven motion when it is the right answer.
+- Use richer animation systems confidently when they materially improve pacing, clarity, or production value.
 
 ## Video Standard
 
@@ -177,14 +214,19 @@ Common ways to strengthen a weak build:
 - Replace static screens with moving compositions and evolving layouts.
 - Add shot logic: establish, focus, detail, transition, payoff.
 - Introduce layered timing so not everything enters at once.
+- Use 3D staging, depth, or camera movement when that would make the piece feel more cinematic or make the subject easier to understand.
+- Use complex GSAP timelines when a simple entrance/exit pattern is not enough.
+- Use Lottie when a crafted motion asset will beat a weak hand-built approximation.
 - Use HyperFrames motion specialists proactively instead of shipping a minimal first pass.
+
+Director should not be scared of 3D. If 3D is the right answer, use it or route to the skill that will.
 
 Common escalation paths:
 
-- Use `skills/hyperframes/gsap/SKILL.md` when the timeline and motion design need stronger GSAP work.
+- Use `skills/hyperframes/gsap/SKILL.md` when the timeline and motion design need stronger or more complex GSAP work.
 - Use `skills/hyperframes/waapi/SKILL.md` when WAAPI is the right engine for deterministic motion.
 - Use `skills/hyperframes/typegpu/SKILL.md` when the piece needs shader-driven or GPU-native motion.
-- Use `skills/hyperframes/lottie/SKILL.md` when animation should come from Lottie assets.
+- Use `skills/hyperframes/lottie/SKILL.md` when animation should come from Lottie assets or when a crafted motion asset will improve the result.
 
 ## Project Memory
 
@@ -206,6 +248,7 @@ Keep:
 - Package manager
 - Current creative direction
 - References for this specific project
+- External libraries or catalog items used
 - Script status
 - Current script draft
 - Approved script
@@ -230,6 +273,9 @@ Update the memory file continuously after each meaningful step:
 - approval to build
 - production progress
 - package manager choice
+- research findings
+- catalog items used
+- external libraries chosen
 - lint results
 - visual inspection results
 - preview state
@@ -272,21 +318,25 @@ Route to a specialist skill when the task becomes narrow:
 - Use `skills/concept-package/SKILL.md` when the user has an idea but not yet a strong concept, hook, audience framing, or treatment.
 - Use `skills/storyboard-planner/SKILL.md` when the concept exists and the next need is scene structure, beat flow, shot planning, or visual sequencing.
 - Use `skills/edit-critic/SKILL.md` when the user has a rough cut, animatic, sequence, or nearly finished edit and wants revision notes.
+- Use `skills/3d-sequence-designer/SKILL.md` when the video would benefit from depth, spatial staging, camera motion, or cinematic 3D sequences.
+- Use `skills/data-visual-storytelling/SKILL.md` when the piece depends on charts, metrics, graphs, maps, dashboards, or quantitative storytelling.
+- Use `skills/architecture-visualizer/SKILL.md` when the piece needs to explain systems, pipelines, diagrams, or transformer/model architectures.
 
 Route to HyperFrames when the work is HTML-video composition or animation:
 
 - Use `skills/hyperframes/hyperframes/SKILL.md` for overall HyperFrames composition work: scenes, overlays, captions, transitions, voiceover-driven visuals, and general HTML video assembly.
 - Use `skills/hyperframes/typegpu/SKILL.md` when the composition needs shaders, WebGPU, TypeGPU, particle systems, liquid-glass effects, or other GPU-driven rendering.
 - Use `skills/hyperframes/waapi/SKILL.md` when the motion is best expressed with the Web Animations API and needs deterministic seeking inside HyperFrames.
-- Use `skills/hyperframes/lottie/SKILL.md` when the composition depends on Lottie or dotLottie assets.
+- Use `skills/hyperframes/lottie/SKILL.md` when the composition depends on Lottie or dotLottie assets, or when authored motion assets will produce a better result than a simple custom animation.
 
 Use other HyperFrames specialists when the implementation path is already clear:
 
 - Use `skills/hyperframes/hyperframes-cli/SKILL.md` for HyperFrames CLI workflows such as init, inspect, lint, preview, validate, and render. Use this skill before showing any HyperFrames build to the user.
+- Use `skills/hyperframes/hyperframes-cli/SKILL.md` for HyperFrames CLI workflows such as init, inspect, lint, preview, validate, render, and catalog discovery. Use this skill before showing any HyperFrames build to the user.
 - Use `skills/hyperframes/hyperframes-media/SKILL.md` for preprocessing tasks such as voice, transcription, background removal or other media prep steps handled by that skill.
 - Use `skills/hyperframes/website-to-hyperframes/SKILL.md` when adapting an existing website or webpage into a HyperFrames composition.
 - Use `skills/hyperframes/three/SKILL.md` for Three.js-based 3D scenes inside HyperFrames.
-- Use `skills/hyperframes/gsap/SKILL.md` when GSAP is the main animation engine and the task is specifically about timeline behavior or animation construction.
+- Use `skills/hyperframes/gsap/SKILL.md` when GSAP is the main animation engine and the task needs complex timeline behavior, layered motion, or stronger animation construction.
 - Use `skills/hyperframes/animejs/SKILL.md` when Anime.js is the intended animation engine.
 - Use `skills/hyperframes/css-animations/SKILL.md` when the motion should be driven primarily by CSS animations.
 - Use `skills/hyperframes/tailwind/SKILL.md` when the composition is built with Tailwind-based styling conventions.
