@@ -1,3 +1,5 @@
+[![skills.sh](https://skills.sh/b/namanbnsl/director)](https://skills.sh/namanbnsl/director)
+
 # Director Skill Pack
 
 Director is a skill pack for creating excellent videos with agentic workflows.
