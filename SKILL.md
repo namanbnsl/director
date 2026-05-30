@@ -7,7 +7,24 @@ description: Create high-quality videos with agentic workflows
 
 Director helps create excellent videos by starting from creative direction: style, pacing, audience, references, format, and constraints.
 
-## Startup Flow
+## Required Workflow
+
+Director should be proactive and move the project forward in this order:
+
+1. Understand the style.
+2. Understand what the video is about.
+3. Ask whether the user already has a script.
+4. If they have one, ask them to paste it.
+5. If they do not have one, work with them to create one.
+6. Once the user likes the script, ask whether the agent should make the video now.
+7. If yes, start building the video in HyperFrames.
+8. Do not add voiceover unless the user explicitly wants voiceover.
+9. Preview the result.
+10. Ask for feedback and continue iterating.
+
+At every step, update the project memory file so the current state of the video is never lost.
+
+## Style Setup
 
 Before starting any video work:
 
@@ -17,18 +34,14 @@ Before starting any video work:
 2. If no project-specific style exists, check for a global style:
    `$HOME/.director/style.md` on macOS/Linux
    `%USERPROFILE%\.director\style.md` on Windows
-3. If no style exists yet, ask the user whether they want their style saved globally or only for this project.
-4. Ask for the video style.
+3. If no style exists yet, ask whether the style should be saved globally or only for this project.
+4. Ask what the videos should look and feel like.
 5. Save the style in the chosen location.
-6. Create or update a project-specific memory file for the current video.
-7. Check whether `ffmpeg` is installed before continuing.
 
 If no style exists yet, ask:
 
 ```text
 Before I use Director, should I save your video style globally for all projects, or only for this project?
-
-After that, I’ll ask what your videos should look and feel like.
 ```
 
 Then ask:
@@ -47,8 +60,6 @@ Include anything that matters:
 - Things Director should avoid.
 ```
 
-Save the answer before continuing.
-
 Save location:
 
 - Global on macOS/Linux: `$HOME/.director/style.md`
@@ -56,6 +67,50 @@ Save location:
 - Project-specific: `director.style.md` in the project root
 
 If a style already exists, use it automatically unless the user asks to update it.
+
+## Video Understanding
+
+After style is known, understand the actual video request before building anything.
+
+Capture:
+
+- What the video is about
+- The goal of the video
+- The intended audience
+- The target format or platform
+- Any constraints, references, or must-have scenes
+
+If the request is vague, ask focused follow-ups and help the user narrow it down.
+
+## Script Workflow
+
+After the video intent is clear, ask whether the user already has a script.
+
+- If they have a script, ask them to paste it and use that as the source of truth.
+- If they do not have a script, collaborate with them to create one.
+- Do not rush into production before the user is happy with the script or script-equivalent structure.
+
+When collaborating on a script:
+
+- Propose a first draft proactively.
+- Revise it with the user until they like it.
+- Keep the approved version in the project memory file.
+
+## Build Permission
+
+Once the user likes the script, explicitly ask whether the agent should make the video now.
+
+If the user says yes:
+
+1. Check whether `ffmpeg` is installed.
+2. Use HyperFrames as the default production path.
+3. Build the video without voiceover unless the user explicitly asked for voiceover.
+4. Preview the result.
+5. Ask for feedback and continue iterating.
+
+Use `ffmpeg -version` or `which ffmpeg` / `where ffmpeg` depending on platform.
+
+If `ffmpeg` is missing, stop and tell the user that Director requires `ffmpeg` before video work can continue.
 
 ## Project Memory
 
@@ -70,25 +125,36 @@ This file should track the current video only. Update it as the project evolves.
 Keep:
 
 - Project name or working title
+- What the video is about
 - Goal of the video
 - Intended audience
 - Deliverable format
 - Current creative direction
 - References for this specific project
 - Script status
+- Current script draft
+- Approved script
 - Shot or scene plan
 - Asset status
+- Build status
+- Preview status
 - Edit notes
+- User feedback
 - Open questions
 - Next steps
 
+Update the memory file continuously after each meaningful step:
+
+- style decisions
+- video intent
+- script changes
+- approval to build
+- production progress
+- preview state
+- feedback
+- next iteration plan
+
 If a global style exists, use it as background taste. The project memory file should only contain project-specific decisions and progress.
-
-After loading or saving style, check for `ffmpeg`.
-
-Use `ffmpeg -version` or `which ffmpeg` / `where ffmpeg` depending on platform.
-
-If `ffmpeg` is missing, stop and tell the user that Director requires `ffmpeg` before video work can continue.
 
 ## Style Priority
 
