@@ -38,8 +38,6 @@ Include anything that matters:
 
 Save the answer before continuing.
 
-Use `$DIRECTOR_HOME/style.md` if `DIRECTOR_HOME` is set. Otherwise use the platform default:
-
 - macOS/Linux: `$HOME/.director/style.md`
 - Windows: `%USERPROFILE%\.director\style.md`
 
